@@ -24,4 +24,4 @@ def update_student(student_id: int, update_data: Student, db: Session = Depends(
 
 @router.delete("/{student_id}")
 def delete_student(student_id: int, db: Session = Depends(get_db)):
-    pass
+    return StudentController.delete(student_id, db)
