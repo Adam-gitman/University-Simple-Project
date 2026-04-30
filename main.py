@@ -1,18 +1,24 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
+from fastapi.responses import FileResponse
+from fastapi.middleware.cors import CORSMiddleware
+from routes import students
+from database import engine, Base
+
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.include_router(students.router)
 app.mount("/static", StaticFiles(directory="frontend"), name="static")
 
-templates = Jinja2Templates(directory="frontend")
-
 @app.get("/")
-async def read_index(request: Request):
-    # En lugar de un diccionario complejo, usamos argumentos con nombre si es necesario
-    return templates.TemplateResponse(
-        request=request, 
-        name="index.html", 
-        context={} # Aquí puedes meter tus datos del CRUD más adelante
-    )
+def index():
+    return FileResponse("frontend/index.html")
