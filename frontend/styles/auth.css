@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+:root {
+    --font-sans: 'Calibre', 'Inter', 'San Francisco', 'SF Pro Text', -apple-system, system-ui, sans-serif;
+    --bg-color: #f7f8f9;
+    --card-bg: #ffffff;
+    --text-main: #1a1a1a;
+    --text-muted: #6b7280;
+    --primary-blue: #3f5cfb;
+    --border-color: #e5e7eb;
+}
+
+body {
+    background-color: var(--bg-color);
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--font-sans);
+}
+
+.otp-card {
+    background: var(--card-bg);
+    padding: 60px 50px;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+}
+
+.otp-card h2 {
+    margin: 0 0 12px;
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--text-main);
+}
+
+.description {
+    color: var(--text-muted);
+    font-size: 15px;
+    margin: 0 0 20px;
+}
+
+.edit-email {
+    font-size: 14px;
+    margin-bottom: 40px;
+}
+
+.edit-email span {
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.edit-email a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.edit-email a:hover {
+    text-decoration: underline;
+}
+
+.otp-inputs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+
+.otp-inputs input {
+    width: 48px;
+    height: 56px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 24px;
+    text-align: center;
+    color: var(--text-main);
+    background-color: transparent;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.otp-inputs input:focus {
+    border-color: var(--primary-blue);
+}
+
+.separator {
+    color: var(--text-main);
+    font-size: 20px;
+    margin: 0 5px;
+}
+
+.verify-btn {
+    width: 100%;
+    background-color: var(--primary-blue);
+    color: #ffffff;
+    border: none;
+    padding: 16px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 35px;
+    transition: background-color 0.2s ease;
+}
+
+.verify-btn:hover {
+    background-color: #2f4be6;
+}
+
+.verify-btn .arrow {
+    font-size: 18px;
+}
+
+.resend {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-main);
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+    <link rel="stylesheet" href="/static/styles/auth.css">
+</head>
+<body>
+
+    <form id="auth-form" class="otp-card">
+        <h2>Ingresa el código</h2>
+        <p class="description">Enviamos un código de verificación a info@example.com.</p>
+        
+        <div class="edit-email">
+            <span>Dirección de correo incorrecta?</span> <a href="/">Editar</a>
+        </div>
+
+        <div class="otp-inputs">
+            <input type="text" maxlength="1" class="otp-field">
+            <input type="text" maxlength="1" class="otp-field">
+            <input type="text" maxlength="1" class="otp-field">
+            <span class="separator">-</span>
+            <input type="text" maxlength="1" class="otp-field">
+            <input type="text" maxlength="1" class="otp-field">
+            <input type="text" maxlength="1" class="otp-field">
+        </div>
+
+        <button class="verify-btn">
+            Verify Code <span class="arrow">&rarr;</span>
+        </button>
+
+        <p class="resend">El código expira en: <span id="timer">05:00</span></p>
+    </form>
+
+    <script src="/static/js/auth.js"></script>
+</body>
+</html>
