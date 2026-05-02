@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="/static/styles/list.css">
+    <link href="https://cdn.boxicons.com/3.0.8/fonts/basic/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="sec_table">
+        <div class="table-container">
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>NOMBRE</th>
+                        <th>EDAD</th>
+                        <th>NOTA</th>
+                        <th>ESTADO</th>
+                        <th>ACCIONES</th>
+                    </tr>
+                </thead>
+                <tbody id="students-list">
+                                   
+                </tbody>
+
+                <template id="student-row-template">
+                    <tr>
+                        <td class="col-id"></td>
+                        <td>
+                            <div class="user-info">
+                                <span class="col-name"></span>
+                            </div>
+                        </td>
+                        <td class="col-age"></td>
+                        <td class="col-grade"></td>
+                        <td><span class="badge"></span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <a href="javascript:void(0)" class="action-btn btn-edit"><i class="bx bx-edit-alt"></i></a>
+                                <a href="javascript:void(0)" class="action-btn btn-delete"><i class="bx bx-trash-alt"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                </template>
+            </table>
+        </div>
+    </div>
+
+    <script src="/static/js/index.js"></script>
+</body>
+</html>
