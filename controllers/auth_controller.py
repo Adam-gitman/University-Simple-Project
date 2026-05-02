@@ -44,7 +44,9 @@ class AuthController:
         msg.attach(MIMEText(body, "plain"))
 
         try:
-            with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT) as server:
+            # Cambiamos SMTP_SSL por SMTP estándar para el puerto 587
+            with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
+                server.starttls()  # <--- CRITICO: Inicia el cifrado TLS
                 server.login(EMAIL_SENDER, EMAIL_PASSWORD)
                 server.sendmail(EMAIL_SENDER, email, msg.as_string())
             return {"success": True, "message": "Código enviado al correo"}
