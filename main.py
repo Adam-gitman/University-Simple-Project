@@ -31,3 +31,7 @@ def auth_page():
 @app.get("/index.html")
 def home():
     return FileResponse("frontend/index.html")
+
+@app.get("/view-list")
+def view_list():
+    return FileResponse("frontend/view-list/index.html")

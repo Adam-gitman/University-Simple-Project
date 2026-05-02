@@ -14,6 +14,12 @@ function setupForm() {
     })
 }
 
+document.getElementById('cancel-btn').addEventListener('click', () => {
+    document.getElementById('student-form').reset();
+    document.getElementById('student-id').value = "";
+    document.getElementById('submit-btn').textContent = "Guardar";
+});
+
 function saveStudents() {
     const id = document.getElementById("student-id").value;
     const name = document.getElementById("name").value;
