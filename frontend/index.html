@@ -3,51 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Formulario de Participantes</title>
+    <link rel="stylesheet" href="/static/styles/style.css">
+    <link href="https://cdn.boxicons.com/3.0.8/fonts/basic/boxicons.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <h1>Gestión estudiantes</h1>
-        <div>
-            <h2>Nuevo Estudiante</h2>
-            <form id="student-form">
-                <input type="hidden" id="student-id">
-                <div>
-                    <label for="name">Nombre</label>
-                    <input type="text" id="name" name="name" required minlength="2" placeholder="Digite nombre">
-                </div>
-                <div>
-                    <label for="age">Edad</label>
-                    <input type="number" id="age" name="age" required min="1" placeholder="Digite su edad">
-                </div>
-                <div>
-                    <label for="grade">Nota</label>
-                    <input type="number" id="grade" name="grade" required min="0" max="5" step="any" placeholder="Digite nota 0-5">
-                </div>
-                <div>
-                    <button type="submit" id="submit-btn">Guardar</button>
-                    <button type="button">Cancelar</button>
-                </div>
-            </form>
+    <div class="form-container">
+        <div class="form-header">
+            <h2>Gestión estudiantes</h2>
         </div>
-        <div>
-            <h2>Lista de estudiantes</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <td>ID</td>
-                        <td>Nombre</td>
-                        <td>Edad</td>
-                        <td>Nota</td>
-                        <td>Acciones</td>
-                    </tr>
-                </thead>
-                <tbody id="students-list">
 
-                </tbody>
-            </table>
-        </div>
+        <form id="student-form">
+            <input type="hidden" id="student-id">
+            <div class="form_content">
+                <div class="h-form">
+                    <h3>Nuevo Estudiante</h3>
+                    <a href="/view-list" class="show-btn"><i class="bx bx-eye-alt"></i>View all</a>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input type="text" id="name" name="name" required minlength="2" placeholder="Digite nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Edad</label>
+                        <input type="number" id="age" name="age" required min="1" placeholder="Digite su edad">
+                    </div>
+                    <div class="form-group">
+                        <label for="grade">Nota</label>
+                        <input type="number" id="grade" name="grade" required min="0" max="5" step="any" placeholder="Digite nota 0-5">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-footer">
+                <button type="button" class="btn-cancel" id="cancel-btn">Cancelar</button>
+                <button type="submit" class="btn-save" id="submit-btn">Guardar</button>
+            </div>
+        </form>
     </div>
-    <script src="/static/index.js"></script>
+    <script src="/static/js/index.js"></script>
 </body>
 </html>
