@@ -24,3 +24,28 @@ class StudentController:
         db.commit()
         db.refresh(new_student)
         return new_student
+    
+    @staticmethod
+    def delete(student_id: int, db: Session= Depends(get_db))->dict:
+        student = db.query(StudentDB).filter(StudentDB.id == student_id).first()
+
+        if not student:
+            raise HTTPException(status_code=404, detail="Estudiante no encontrado")
+        
+        db.delete(student)
+        db.commit()
+        return {"detail": "Estudiante eliminado exitosamente"} 
+    
+    @staticmethod
+    def update(student_id: int, student: Student, db: Session= Depends(get_db))->dict:
+        existing_student = db.query(StudentDB).filter(StudentDB.id == student_id).first()
+
+        if not existing_student:
+            raise HTTPException(status_code=404, detail="Estudiante no encontrado")
+        
+        for key, value in student.model_dump().items():
+            setattr(existing_student, key, value)
+        
+        db.commit()
+        db.refresh(existing_student)
+        return existing_student
