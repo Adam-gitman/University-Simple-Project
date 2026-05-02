@@ -10,9 +10,16 @@ templates = Jinja2Templates(directory="frontend")
 
 @app.get("/")
 async def read_index(request: Request):
-    # En lugar de un diccionario complejo, usamos argumentos con nombre si es necesario
     return templates.TemplateResponse(
         request=request, 
         name="index.html", 
-        context={} # Aquí puedes meter tus datos del CRUD más adelante
+        context={}
     )
+
+@app.get("/view-list")
+async def read_view_list(request: Request):
+    return templates.TemplateResponse(
+        request=request, 
+        name="view-list/index.html", 
+        context={}
+        )
