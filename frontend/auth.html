@@ -4,19 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verificar código</title>
+    <link rel="stylesheet" href="/static/styles/style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Ingresa el código</h1>
-        <form id="auth-form">
-            <div>
-                <label for="otp">Código de verificación</label>
-                <input type="text" id="otp" required placeholder="Digite el código">
+    <div class="form-container">
+        <div class="form-header">
+            <h2>Ingresa el código</h2>
+        </div>
+        <div class="form_content">
+            <div class="h-form">
+                <h3>Código de verificación</h3>
             </div>
-            <div>
-                <button type="submit">Verificar</button>
-            </div>
-        </form>
+            <form id="auth-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="otp">Código de verificación</label>
+                        <input type="text" id="otp" required placeholder="Digite el código">
+                    </div>
+                </div>
+                <div class="form-footer">
+                    <button type="submit" class="btn-save">Verificar</button>
+                </div>
+            </form>
+        </div>
     </div>
     <script src="/static/auth.js"></script>
 </body>
