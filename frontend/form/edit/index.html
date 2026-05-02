@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Participantes</title>
+    <link rel="stylesheet" href="/static/styles/form.css">
+    <link href="https://cdn.boxicons.com/3.0.8/fonts/basic/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="form-container">
+        <div class="form-header">
+            <h2>Gestión estudiantes</h2>
+        </div>
+
+        <form id="student-form" action="">
+            <div class="form_content">
+                <div class="h-form">
+                    <h3>Editar Estudiante</h3>
+                    <a href="/view-list" class="show-btn"><i class="bx bx-eye-alt"></i>View all</a>
+                </div>
+                <div class="form-grid">
+                    <input type="hidden" id="student-id">
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input type="text" id="name" name="name" required minlength="2" placeholder="Digite nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Edad</label>
+                        <input type="text" name="age" id="age" min="1" inputmode="numeric" pattern="[0-9]*" placeholder="Digite edad" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="grade">Nota</label>
+                        <input type="text" inputmode="numeric" id="grade" name="grade" required min="0" max="5" placeholder="Digite nota">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-footer">
+                <button type="button" class="btn-cancel">Cancel</button>
+                <button type="submit" id="submit-btn" class="btn-save">Save Now</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="/static/js/index.js"></script>
+
+</body>
+</html>
