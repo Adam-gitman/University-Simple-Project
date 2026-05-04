@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                 // IMPORTANTE: No borres el email si lo necesitas para el formulario, 
                 // o usa una sesión/token de acceso aquí.
-                window.location.href = "/form/edit/"; 
+                window.location.href = "/form/"; 
             } else {
                 // ERROR: Código incorrecto
                 alert("❌ Código incorrecto. Inténtalo de nuevo.");
