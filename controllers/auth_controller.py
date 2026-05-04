@@ -1,20 +1,17 @@
 import os
+import resend
 import random
-import smtplib
 from pathlib import Path
 from dotenv import load_dotenv
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
 
+# Cargar variables
 base_dir = Path(__file__).resolve().parent.parent
-env_path = base_dir / '.env.local' 
-
+env_path = base_dir / '.env.local'
 load_dotenv(dotenv_path=env_path)
 
+# Configurar Resend
+resend.api_key = os.getenv("RESEND_API_KEY")
 EMAIL_SENDER = os.getenv("EMAIL_SENDER")
-EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
-SMTP_SERVER = os.getenv("SMTP_SERVER", "smtp.gmail.com")
-SMTP_PORT = int(os.getenv("SMTP_PORT", 465))
 
 otp_storage = {}
 
@@ -26,41 +23,35 @@ class AuthController:
 
     @staticmethod
     def send_otp(email: str):
-        if not EMAIL_SENDER or not EMAIL_PASSWORD:
-            return {
-                "success": False, 
-                "message": f"Error interno: Variables no cargadas. Buscando en: {env_path}"
+        try:
+            otp = AuthController.generate_otp()
+            otp_storage[email] = otp
+
+            # Enviar usando la librería de Resend
+            params = {
+                "from": f"Verificación <{EMAIL_SENDER}>",
+                "to": [email],
+                "subject": "Tu Código de Verificación",
+                "html": f"""
+                <div style="font-family: sans-serif; text-align: center;">
+                    <h2>Código de Acceso</h2>
+                    <p style="font-size: 24px; font-weight: bold; color: #4F46E5;">{otp}</p>
+                    <p>Este código expirará en 5 minutos.</p>
+                </div>
+                """,
             }
 
-        otp = AuthController.generate_otp()
-        otp_storage[email] = otp
+            resend.Emails.send(params)
+            print(f"✅ OTP enviado a {email} vía Resend")
+            return {"success": True, "message": "Código enviado"}
 
-        msg = MIMEMultipart()
-        msg["From"] = EMAIL_SENDER
-        msg["To"] = email
-        msg["Subject"] = "Código de verificación"
-
-        body = f"Tu código de verificación es: {otp}"
-        msg.attach(MIMEText(body, "plain"))
-
-        try:
-            # Cambiamos SMTP_SSL por SMTP estándar para el puerto 587
-            with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
-                server.starttls()  # <--- CRITICO: Inicia el cifrado TLS
-                server.login(EMAIL_SENDER, EMAIL_PASSWORD)
-                server.sendmail(EMAIL_SENDER, email, msg.as_string())
-            return {"success": True, "message": "Código enviado al correo"}
         except Exception as e:
-            print(f"Error SMTP: {e}")
-            return {"success": False, "message": f"No se pudo enviar el correo: {str(e)}"}
+            print(f"❌ Error con Resend: {e}")
+            return {"success": False, "message": "Fallo al enviar correo"}
 
     @staticmethod
     def verify_otp(email: str, otp: str):
-        if email not in otp_storage:
-            return {"valid": False, "message": "Correo no encontrado"}
-        
-        if otp_storage[email] == otp:
+        if email in otp_storage and otp_storage[email] == otp:
             del otp_storage[email]
-            return {"valid": True, "message": "Código correcto"}
-        
-        return {"valid": False, "message": "Código incorrecto"}
+            return {"valid": True, "message": "Correcto"}
+        return {"valid": False, "message": "Incorrecto"}
