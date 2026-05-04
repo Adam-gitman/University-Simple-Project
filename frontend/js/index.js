@@ -1,7 +1,7 @@
 /**
  * CONFIGURACIÓN DE LA API
  */
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = "https://estudiantes-api-q5r3.onrender.com/students";
 
 document.addEventListener('DOMContentLoaded', () => {
     setupForm();
