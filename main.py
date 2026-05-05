@@ -43,7 +43,7 @@ async def read_index(request: Request):
 async def read_index(request: Request):
     return templates.TemplateResponse(
         request=request, 
-        name="/form/index.html", 
+        name="form/index.html", 
         context={}
     )
 
@@ -51,7 +51,7 @@ async def read_index(request: Request):
 async def read_index(request: Request):
     return templates.TemplateResponse(
         request=request, 
-        name="/form/edit/index.html", 
+        name="form/edit/index.html", 
         context={}
     )
 
