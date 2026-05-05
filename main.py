@@ -27,7 +27,7 @@ templates = Jinja2Templates(directory="frontend")
 async def read_index(request: Request):
     return templates.TemplateResponse(
         request=request, 
-        name="auth/login/login.html", 
+        name="index.html", 
         context={}
     )
 
