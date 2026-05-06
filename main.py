@@ -1,42 +1,64 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from routes import students, auth
 from database import engine, Base
 
-# Crea las tablas en la base de datos al iniciar
 Base.metadata.create_all(bind=engine)
 
-app = FastAPI(
-    title="University API",
-    description="API para la gestión de estudiantes",
-    version="1.0.0"
-)
+app = FastAPI()
 
-# CONFIGURACIÓN DE CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "https://estudiantes-web-lwcp.onrender.com", # Tu URL de producción
-        "http://localhost:5173",                     
-        "http://127.0.0.1:5173"
-    ],
-    allow_credentials=True,
+    allow_origins=["*"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# RUTAS DE LA API
-app.include_router(students.router, tags=["Students"])
-app.include_router(auth.router, tags=["Auth"])
+app.include_router(students.router)
+app.include_router(auth.router)
+app.mount("/static", StaticFiles(directory="frontend"), name="static")
+
+templates = Jinja2Templates(directory="frontend")
 
 @app.get("/")
-async def root():
-    """
-    Ruta de verificación para saber que el backend está funcionando.
-    """
-    return {
-        "status": "online",
-        "message": "University API is running",
-        "frontend_allowed": "https://estudiantes-web-lwcp.onrender.com",
-        "docs": "/docs"
-    }
+async def read_index(request: Request):
+    return templates.TemplateResponse(
+        request=request, 
+        name="auth/login/login.html", 
+        context={}
+    )
+
+@app.get("/auth")
+async def read_index(request: Request):
+    return templates.TemplateResponse(
+        request=request, 
+        name="auth/auth.html", 
+        context={}
+    )
+
+@app.get("/form")
+async def read_index(request: Request):
+    return templates.TemplateResponse(
+        request=request, 
+        name="form/index.html", 
+        context={}
+    )
+
+@app.get("/form/edit")
+async def read_index(request: Request):
+    return templates.TemplateResponse(
+        request=request, 
+        name="form/edit/index.html", 
+        context={}
+    )
+
+@app.get("/view-list")
+async def read_view_list(request: Request):
+    return templates.TemplateResponse(
+        request=request, 
+        name="view-list/index.html", 
+        context={}
+        )
